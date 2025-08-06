@@ -1,13 +1,11 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Search, User, Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
+import { Menu, Search, User } from "lucide-react";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
-  const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
 
   const navigation = [
@@ -52,14 +50,6 @@ const Navbar = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="text-foreground-muted hover:text-foreground"
-            >
-              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </Button>
             <Link to="/login">
               <Button variant="outline" size="sm">
                 <User className="h-4 w-4 mr-2" />
@@ -106,17 +96,6 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex flex-col space-y-3 pt-6 border-t border-border">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-foreground-muted">Theme</span>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                    >
-                      {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                    </Button>
-                  </div>
-                  
                   <Link to="/login" onClick={() => setIsOpen(false)}>
                     <Button variant="outline" className="w-full">
                       <User className="h-4 w-4 mr-2" />

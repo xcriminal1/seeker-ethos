@@ -1,33 +1,31 @@
-import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "next-themes";
-import Navbar from "./components/layout/Navbar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Footer from "./components/layout/Footer";
+import Navbar from "./components/layout/Navbar";
 
 // Pages
-import Index from "./pages/Index";
-import Search from "./pages/Search";
+import AadhaarSearch from "./pages/AadhaarSearch";
 import About from "./pages/About";
-import Pricing from "./pages/Pricing";
-import Members from "./pages/Members";
+import Index from "./pages/Index";
 import JoinUs from "./pages/JoinUs";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import AadhaarSearch from "./pages/AadhaarSearch";
+import Members from "./pages/Members";
 import NotFound from "./pages/NotFound";
+import Pricing from "./pages/Pricing";
+import Search from "./pages/Search";
+import Signup from "./pages/Signup";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
           <div className="flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1">
@@ -49,7 +47,6 @@ const App = () => (
           </div>
         </BrowserRouter>
       </TooltipProvider>
-    </ThemeProvider>
   </QueryClientProvider>
 );
 
