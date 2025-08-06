@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Search, Shield, Users, Clock, Star, ChevronDown, ArrowRight, Sparkles } from "lucide-react";
-import { toast } from "sonner";
+import { ArrowRight, ChevronDown, Clock, Search, Shield, Sparkles, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
