@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Search, Shield, Users, Clock, Star, ChevronDown, ArrowRight, Sparkles } from "lucide-react";
-import { toast } from "sonner";
+import { ArrowRight, ChevronDown, Clock, Search, Shield, Sparkles, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -30,26 +29,31 @@ const Index = () => {
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Geometric Pattern */}
-        <div className="absolute top-0 left-0 w-full h-full opacity-20">
-          <div className="absolute top-20 left-20 w-32 h-32 border border-primary/30 rotate-45 animate-pulse"></div>
-          <div className="absolute top-40 right-32 w-24 h-24 border border-secondary/30 rotate-12 animate-bounce"></div>
-          <div className="absolute bottom-32 left-40 w-40 h-40 border border-accent/30 -rotate-12 animate-spin"></div>
-          <div className="absolute bottom-20 right-20 w-28 h-28 border border-primary/30 rotate-45 animate-pulse"></div>
+        <div className="absolute top-0 left-0 w-full h-full opacity-40">
+          {/* Original boxes */}
+          <div className="absolute top-20 left-20 w-32 h-32 border border-primary/60 rotate-45 animate-pulse"></div>
+          <div className="absolute top-40 right-32 w-24 h-24 border border-secondary/60 rotate-12 animate-bounce"></div>
+          <div className="absolute bottom-32 left-40 w-40 h-40 border border-accent/60 -rotate-12 animate-spin"></div>
+          <div className="absolute bottom-20 right-20 w-28 h-28 border border-primary/60 rotate-45 animate-pulse"></div>
+          
+          {/* Additional floating boxes */}
+          <div className="absolute top-60 left-1/4 w-20 h-20 border border-secondary/70 rotate-30 animate-spin" style={{ animationDuration: '8s' }}></div>
+          <div className="absolute top-1/3 right-1/4 w-36 h-36 border border-accent/50 -rotate-45 animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-1/3 left-1/2 w-16 h-16 border border-primary/65 rotate-60 animate-bounce" style={{ animationDelay: '0.5s' }}></div>
+          <div className="absolute top-3/4 left-16 w-28 h-28 border border-accent/60 -rotate-30 animate-spin" style={{ animationDuration: '12s' }}></div>
+          <div className="absolute bottom-1/4 right-1/3 w-22 h-22 border border-secondary/65 rotate-75 animate-pulse" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/2 left-12 w-14 h-14 border border-primary/70 -rotate-60 animate-bounce" style={{ animationDelay: '1.5s' }}></div>
+          <div className="absolute bottom-16 left-1/3 w-32 h-32 border border-accent/55 rotate-15 animate-spin" style={{ animationDuration: '15s' }}></div>
+          <div className="absolute top-16 right-16 w-18 h-18 border border-secondary/62 -rotate-45 animate-pulse" style={{ animationDelay: '0.8s' }}></div>
+          <div className="absolute top-2/3 right-1/2 w-26 h-26 border border-primary/50 rotate-90 animate-bounce" style={{ animationDelay: '2.5s' }}></div>
+          <div className="absolute bottom-40 right-12 w-20 h-20 border border-accent/68 -rotate-75 animate-spin" style={{ animationDuration: '10s' }}></div>
+          
+          {/* Small floating squares */}
+          <div className="absolute top-1/4 left-3/4 w-12 h-12 border border-primary/60 rotate-45 animate-pulse" style={{ animationDelay: '3s' }}></div>
+          <div className="absolute bottom-3/4 left-2/3 w-10 h-10 border border-secondary/70 -rotate-30 animate-bounce" style={{ animationDelay: '1.2s' }}></div>
+          <div className="absolute top-80 right-1/5 w-15 h-15 border border-accent/65 rotate-60 animate-spin" style={{ animationDuration: '6s' }}></div>
+          <div className="absolute bottom-60 left-1/5 w-24 h-24 border border-primary/55 -rotate-15 animate-pulse" style={{ animationDelay: '2.8s' }}></div>
         </div>
-
-        {/* Floating Particles */}
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute w-2 h-2 bg-primary rounded-full opacity-60 animate-float`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${3 + Math.random() * 2}s`
-            }}
-          />
-        ))}
 
         {/* Grid Lines */}
         <div className="absolute inset-0 opacity-10">
@@ -61,10 +65,6 @@ const Index = () => {
             backgroundSize: '50px 50px'
           }}></div>
         </div>
-
-        {/* Large Sphere */}
-        <div className="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-gradient-to-br from-primary/20 via-secondary/10 to-transparent blur-3xl transform translate-x-1/3 translate-y-1/3"></div>
-        <div className="absolute top-0 left-0 w-80 h-80 rounded-full bg-gradient-to-br from-accent/15 via-primary/10 to-transparent blur-3xl transform -translate-x-1/3 -translate-y-1/3"></div>
       </div>
 
       {/* Mouse Follower */}
