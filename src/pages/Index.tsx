@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, ChevronDown, Clock, Search, Shield, Sparkles, Users } from "lucide-react";
+import { ArrowRight, Award, BookOpen, ChevronDown, Code, Shield, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -147,39 +147,207 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Tech Tools Circular Section */}
+      <section className="py-20 px-4 relative bg-background">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Welcome to <span className="text-gradient">CyberZero</span>
+            </h2>
+            <p className="text-xl text-foreground-muted max-w-4xl mx-auto leading-relaxed">
+              education center to develop skills from professional tech experts.
+            </p>
+            <p className="text-lg text-foreground-muted mt-4 max-w-2xl mx-auto">
+              More efficient and more effective.
+            </p>
+          </div>
+
+          {/* Circular Tech Tools Layout */}
+          <div className="relative flex items-center justify-center min-h-[600px] mt-16">
+            {/* Central Circle with Circuit Board Pattern */}
+            <div className="absolute z-10 w-40 h-40 md:w-48 md:h-48 rounded-full bg-gradient-to-br from-blue-400 via-cyan-300 to-purple-500 flex items-center justify-center shadow-2xl">
+              <div className="w-32 h-32 md:w-36 md:h-36 rounded-full bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 flex items-center justify-center relative overflow-hidden">
+                {/* Circuit board pattern */}
+                <div className="absolute inset-0 opacity-60">
+                  <img
+                    src="/logo.webp"
+                    alt="CyberZero Logo"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+                {/* Central Key Icon */}
+                <div className="relative z-10 w-12 h-12 md:w-16 md:h-16 flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" className="w-8 h-8 md:w-10 md:h-10 text-cyan-300">
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating Tech Tool Icons with Real App Styling */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              
+              {/* Wireshark - Top */}
+              <div className="absolute -top-9 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                  <div className="text-blue-600 text-lg font-bold">W</div>
+                </div>
+              </div>
+              
+              {/* CyberChef - Top Right */}
+              <div className="absolute -top-8 right-1/4 transform translate-x-6 w-20 h-20 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
+                <div className="text-white text-2xl">🍳</div>
+              </div>
+              
+              {/* Maltego - Right */}
+              <div className="absolute right-0 top-1/2 transform translate-x-12 -translate-y-1/2 w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                  <div className="text-blue-600 text-lg font-bold">M</div>
+                </div>
+              </div>
+              
+              {/* Suricata - Bottom Right */}
+              <div className="absolute bottom-8 right-1/4 transform translate-x-6 w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                  <div className="text-orange-600 text-xs font-bold">SUR</div>
+                </div>
+              </div>
+              
+              {/* YARA - Bottom */}
+              <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
+                <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
+                  <div className="text-red-400 text-sm font-bold">Y</div>
+                </div>
+              </div>
+              
+              {/* Aircrack-ng - Bottom Left */}
+              <div className="absolute bottom-8 left-1/4 transform -translate-x-6 w-20 h-20 bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                  <div className="text-gray-800 text-xs font-bold">AIR</div>
+                </div>
+              </div>
+              
+              {/* Prompt - Left */}
+              <div className="absolute left-0 top-1/2 transform -translate-x-12 -translate-y-1/2 w-20 h-20 bg-gradient-to-br from-green-600 to-green-800 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
+                <div className="text-white text-2xl">{'>'}</div>
+              </div>
+              
+              {/* Nmap - Top Left */}
+              <div className="absolute -top-8 left-1/4 transform -translate-x-6 w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                  <div className="text-indigo-600 text-lg font-bold">N</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Curved Connecting Lines with Arrows */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 600 600">
+              <defs>
+                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="rgb(59 130 246)" stopOpacity="0.4" />
+                  <stop offset="50%" stopColor="rgb(34 211 238)" stopOpacity="0.6" />
+                  <stop offset="100%" stopColor="rgb(147 51 234)" stopOpacity="0.4" />
+                </linearGradient>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                  <polygon points="0 0, 10 3.5, 0 7" fill="rgb(34 211 238)" opacity="0.6"/>
+                </marker>
+              </defs>
+              
+              {/* Curved paths from center to each tool */}
+              <path d="M 300,300 Q 250,150 300,80" fill="none" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="8,4" markerEnd="url(#arrowhead)" className="animate-pulse"/>
+              <path d="M 300,300 Q 450,150 400,100" fill="none" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="8,4" markerEnd="url(#arrowhead)" className="animate-pulse" style={{animationDelay: '0.5s'}}/>
+              <path d="M 300,300 Q 500,250 520,300" fill="none" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="8,4" markerEnd="url(#arrowhead)" className="animate-pulse" style={{animationDelay: '1s'}}/>
+              <path d="M 300,300 Q 450,450 400,500" fill="none" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="8,4" markerEnd="url(#arrowhead)" className="animate-pulse" style={{animationDelay: '1.5s'}}/>
+              <path d="M 300,300 Q 250,450 300,520" fill="none" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="8,4" markerEnd="url(#arrowhead)" className="animate-pulse" style={{animationDelay: '2s'}}/>
+              <path d="M 300,300 Q 150,450 200,500" fill="none" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="8,4" markerEnd="url(#arrowhead)" className="animate-pulse" style={{animationDelay: '2.5s'}}/>
+              <path d="M 300,300 Q 100,250 80,300" fill="none" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="8,4" markerEnd="url(#arrowhead)" className="animate-pulse" style={{animationDelay: '3s'}}/>
+              <path d="M 300,300 Q 150,150 200,100" fill="none" stroke="url(#lineGradient)" strokeWidth="2" strokeDasharray="8,4" markerEnd="url(#arrowhead)" className="animate-pulse" style={{animationDelay: '3.5s'}}/>
+              
+              {/* Outer rotating circle */}
+              <circle 
+                cx="300" 
+                cy="300" 
+                r="220" 
+                fill="none" 
+                stroke="url(#lineGradient)" 
+                strokeWidth="1" 
+                strokeDasharray="15,10"
+                className="animate-spin opacity-30"
+                style={{ animationDuration: '30s' }}
+              />
+            </svg>
+
+            {/* Floating text "More efficient and more effective" */}
+            <div className="absolute -top-4 -left-8 text-white/80 text-lg font-medium transform -rotate-12">
+              <div className="bg-black/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10">
+                More efficient and<br/>more effective.
+              </div>
+            </div>
+
+            {/* Floating text on right side - Security themed */}
+            <div className="absolute -top-4 -right-8 text-white/80 text-lg font-medium transform rotate-12">
+              <div className="bg-black/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10">
+                More secure and<br/>more protective.
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Info Sections */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
+            <div className="text-center">
+              <h3 className="text-xl font-bold mb-4 text-primary">Achievement</h3>
+              <p className="text-foreground-muted text-sm">
+                Successfully trained 500+ police officers in cyber law enforcement & digital forensics.
+              </p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-xl font-bold mb-4 text-primary">About our founder</h3>
+              <p className="text-foreground-muted text-sm">
+                Anmol Kumar is a certified cybersecurity expert, trainer, and law enforcement instructor with extensive hands-on experience in cybercrime investigations, network security, and digital forensics.
+              </p>
+            </div>
+            <div className="text-center">
+              <h3 className="text-xl font-bold mb-4 text-primary">Expertise</h3>
+              <p className="text-foreground-muted text-sm">
+                Certified cybersecurity expert and law enforcement instructor specializing in cybercrime investigations, digital forensics, and threat intelligence.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section id="features" className="py-20 px-4 relative">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Why Choose <span className="text-gradient">CyberZer0</span>?
+              Why Choose <span className="text-gradient">CyberZero</span>?
             </h2>
             <p className="text-xl text-foreground-muted max-w-3xl mx-auto">
-              Built with ethics, transparency, and user privacy at the core
+              Leading technology education center with professional tech experts and industry recognition
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                icon: <Search className="h-8 w-8" />,
-                title: "Advanced Search",
-                description: "Search by name, phone, photo, or Aadhaar with powerful filters"
-              },
-              {
                 icon: <Shield className="h-8 w-8" />,
-                title: "Ethical & Secure",
-                description: "All data is ethically sourced and complies with privacy regulations"
+                title: "Cybersecurity Expert",
+                description: "Certified cybersecurity expert training with 500+ police officers trained"
               },
               {
-                icon: <Users className="h-8 w-8" />,
-                title: "Verified Profiles",
-                description: "Verified information with confidence ratings for accuracy"
+                icon: <Code className="h-8 w-8" />,
+                title: "Programming Skills",
+                description: "Master programming languages and development frameworks from industry experts"
               },
               {
-                icon: <Clock className="h-8 w-8" />,
-                title: "Real-time Results",
-                description: "Get instant search results with up-to-date information"
+                icon: <BookOpen className="h-8 w-8" />,
+                title: "Professional Training",
+                description: "Hands-on courses with industry-recognized certifications and real-world applications"
+              },
+              {
+                icon: <Award className="h-8 w-8" />,
+                title: "Proven Results",
+                description: "Successfully trained 2,500+ university students with specialized expertise"
               }
             ].map((feature, index) => (
               <Card 
@@ -212,21 +380,21 @@ const Index = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent"></div>
             <CardContent className="p-12 text-center relative z-10">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Ready to Find Someone?
+                Ready to Start Learning?
               </h2>
               <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-                Join thousands of users who trust CyberZer0 for ethical and legal people verification.
+                Join CyberZero and develop skills in programming and cybersecurity from professional tech experts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/search">
-                  <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300">
-                    <Search className="mr-2 h-5 w-5" />
-                    Start Searching
+                  <Button size="lg" variant="secondary" className="bg-background text-foreground border-border hover:bg-accent hover:text-accent-foreground hover:scale-105 transition-all duration-300">
+                    <Shield className="mr-2 h-5 w-5" />
+                    Start Learning
                   </Button>
                 </Link>
-                <Link to="/pricing">
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 hover:scale-105 transition-all duration-300">
-                    View Pricing
+                <Link to="/about">
+                  <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background hover:scale-105 transition-all duration-300">
+                    Learn More
                   </Button>
                 </Link>
               </div>

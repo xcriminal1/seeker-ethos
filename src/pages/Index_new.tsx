@@ -218,13 +218,13 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/search">
-                  <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300">
+                  <Button size="lg" variant="secondary" className="bg-background text-foreground border-border hover:bg-accent hover:text-accent-foreground hover:scale-105 transition-all duration-300">
                     <Search className="mr-2 h-5 w-5" />
                     Start Searching
                   </Button>
                 </Link>
                 <Link to="/pricing">
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 hover:scale-105 transition-all duration-300">
+                  <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground hover:text-background hover:scale-105 transition-all duration-300">
                     View Pricing
                   </Button>
                 </Link>

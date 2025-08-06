@@ -1,5 +1,5 @@
+import { Mail, MapPin, Phone, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Search, Shield, Users, Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -9,9 +9,11 @@ const Footer = () => {
           {/* Logo & Description */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-md gradient-primary">
-                <Search className="h-4 w-4 text-white" />
-              </div>
+                <img
+                src="public/logo.webp"
+                alt="CyberZer0 Logo"
+                className="h-8 w-8 rounded-md object-cover"
+                />
               <span className="text-xl font-bold text-gradient">CyberZer0</span>
             </Link>
             <p className="text-foreground-muted text-sm leading-relaxed mb-4">

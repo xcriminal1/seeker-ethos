@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTheme } from "@/hooks/useTheme";
-import { Menu, Moon, Search, Sun, User } from "lucide-react";
+import { Menu, Moon, Shield, Sun, User } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -31,10 +31,14 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md gradient-primary">
-              <Search className="h-4 w-4 text-white" />
+            <div className="flex h-1 w-8 items-center justify-center rounded-md bg-gradient-to-r">
+              <img
+                src="/logo.webp"
+                alt="CyberZero Logo"
+                className="h-6 w-6 rounded-md object-cover"
+                />
             </div>
-            <span className="text-xl font-bold text-gradient">CyberZer0</span>
+            <span className="text-xl font-bold text-gradient">CyberZero</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -76,8 +80,8 @@ const Navbar = () => {
             </Link>
             <Link to="/search">
               <Button size="sm" className="gradient-primary text-white border-0">
-                <Search className="h-4 w-4 mr-2" />
-                Search Now
+                <Shield className="h-4 w-4 mr-2" />
+                Start Learning
               </Button>
             </Link>
           </div>
@@ -93,9 +97,9 @@ const Navbar = () => {
               <div className="flex flex-col gap-6 pt-6">
                 <Link to="/" className="flex items-center space-x-2" onClick={() => setIsOpen(false)}>
                   <div className="flex h-8 w-8 items-center justify-center rounded-md gradient-primary">
-                    <Search className="h-4 w-4 text-white" />
+                    <Shield className="h-4 w-4 text-white" />
                   </div>
-                  <span className="text-xl font-bold text-gradient">CyberZer0</span>
+                  <span className="text-xl font-bold text-gradient">CyberZero</span>
                 </Link>
                 
                 <div className="flex flex-col space-y-4">
@@ -138,8 +142,8 @@ const Navbar = () => {
                   
                   <Link to="/search" onClick={() => setIsOpen(false)}>
                     <Button className="w-full gradient-primary text-white border-0">
-                      <Search className="h-4 w-4 mr-2" />
-                      Search Now
+                      <Shield className="h-4 w-4 mr-2" />
+                      Start Learning
                     </Button>
                   </Link>
                 </div>
