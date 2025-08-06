@@ -34,11 +34,11 @@ const Navbar = () => {
             <div className="flex h-1 w-8 items-center justify-center rounded-md bg-gradient-to-r">
               <img
                 src="/logo.webp"
-                alt="CyberZero Logo"
+                alt="CyberDetect Logo"
                 className="h-6 w-6 rounded-md object-cover"
                 />
             </div>
-            <span className="text-xl font-bold text-gradient">CyberZero</span>
+            <span className="text-xl font-bold text-gradient">CyberDetect</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -99,7 +99,7 @@ const Navbar = () => {
                   <div className="flex h-8 w-8 items-center justify-center rounded-md gradient-primary">
                     <Shield className="h-4 w-4 text-white" />
                   </div>
-                  <span className="text-xl font-bold text-gradient">CyberZero</span>
+                  <span className="text-xl font-bold text-gradient">CyberDetect</span>
                 </Link>
                 
                 <div className="flex flex-col space-y-4">

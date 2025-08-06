@@ -74,13 +74,13 @@ const Signup = () => {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg gradient-primary">
               <UserPlus className="h-5 w-5 text-white" />
             </div>
-            <span className="text-2xl font-bold text-gradient">CyberZero</span>
+            <span className="text-2xl font-bold text-gradient">CyberDetect</span>
           </Link>
         </div>
 
         <Card className="gradient-card border-card-border shadow-xl">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold">Join CyberZero</CardTitle>
+            <CardTitle className="text-2xl font-bold">Join CyberDetect</CardTitle>
             <p className="text-foreground-muted">
               Develop skills in cybersecurity and programming from professional tech experts
             </p>
@@ -242,7 +242,7 @@ const Signup = () => {
                 size="lg" 
                 className="w-full gradient-primary text-white border-0 hover:shadow-glow transition-all duration-300"
               >
-                Join CyberZero
+                Join CyberDetect
               </Button>
 
               {/* Divider */}
@@ -293,7 +293,7 @@ const Signup = () => {
         {/* Ethics Notice */}
         <div className="mt-6 text-center">
           <p className="text-xs text-foreground-muted max-w-sm mx-auto">
-            Join CyberZero education center and develop skills from professional tech experts. 
+            Join CyberDetect education center and develop skills from professional tech experts. 
             Specializing in cybersecurity, programming, data science, and cloud computing.
           </p>
         </div>

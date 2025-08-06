@@ -1,8 +1,8 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Award, CheckCircle, Eye, Globe, Heart, Shield, Target, Users } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Shield, Users, Eye, Target, Award, CheckCircle, Heart, Globe } from "lucide-react";
 
 const About = () => {
   const values = [
@@ -69,7 +69,7 @@ const About = () => {
           </Badge>
           
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            About <span className="text-gradient">CyberZer0</span>
+            About <span className="text-gradient">CyberDetect</span>
           </h1>
           
           <p className="text-xl text-foreground-muted mb-8 max-w-3xl mx-auto">

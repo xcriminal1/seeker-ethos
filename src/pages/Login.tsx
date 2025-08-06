@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const Login = () => {
@@ -41,7 +41,7 @@ const Login = () => {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg gradient-primary">
               <User className="h-5 w-5 text-white" />
             </div>
-            <span className="text-2xl font-bold text-gradient">CyberZer0</span>
+            <span className="text-2xl font-bold text-gradient">CyberDetect</span>
           </Link>
         </div>
 

@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Heart, Users, Code, Shield, Briefcase, GraduationCap, Clock, MapPin } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { Briefcase, Heart, MapPin, Shield, Users } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 const JoinUs = () => {
@@ -284,7 +284,7 @@ const JoinUs = () => {
                   <Checkbox id="terms" required />
                   <Label htmlFor="terms" className="text-sm leading-relaxed">
                     I agree to the terms and conditions and understand that my information will be used 
-                    to evaluate my application and communicate with me about opportunities at CyberZer0.
+                    to evaluate my application and communicate with me about opportunities at CyberDetect.
                   </Label>
                 </div>
 
@@ -306,7 +306,7 @@ const JoinUs = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-primary" />
-                  Why Join CyberZer0?
+                  Why Join CyberDetect?
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">

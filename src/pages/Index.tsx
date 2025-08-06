@@ -94,8 +94,8 @@ const Index = () => {
           {/* Main Heading */}
           <div className={`transition-all duration-1000 delay-200 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight">
-              <span className="block">Providing The</span>
-              <span className="block text-gradient">Best Services</span>
+              <span className="block">Providing Trusted</span>
+              <span className="block text-gradient">Cyber Identities</span>
               <span className="block relative">
                 & IT Solutions
                 <div className="absolute -bottom-4 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent transform scale-x-0 animate-scale-x"></div>
@@ -120,7 +120,7 @@ const Index = () => {
                   size="lg" 
                   className="px-8 py-4 text-lg gradient-primary text-white border-0 hover:scale-105 transition-transform duration-300 group"
                 >
-                  Apply Now
+                  Login/Signup
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
@@ -136,7 +136,7 @@ const Index = () => {
           </div>
 
           {/* Scroll Indicator */}
-          <div className={`transition-all duration-1000 delay-800 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <div className={`transition-all duration-1000 delay-800 transform ${isVisible ? 'translate-y-10 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <button 
               onClick={scrollToFeatures}
               className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center hover:bg-primary/10 transition-colors group"
@@ -148,11 +148,11 @@ const Index = () => {
       </section>
 
       {/* Tech Tools Circular Section */}
-      <section className="py-20 px-4 relative bg-background">
+      <section className="py-4 px-4 relative bg-background">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Welcome to <span className="text-gradient">CyberZero</span>
+              Welcome to <span className="text-gradient">CyberDetect</span>
             </h2>
             <p className="text-xl text-foreground-muted max-w-4xl mx-auto leading-relaxed">
               education center to develop skills from professional tech experts.
@@ -171,7 +171,7 @@ const Index = () => {
                 <div className="absolute inset-0 opacity-60">
                   <img
                     src="/logo.webp"
-                    alt="CyberZero Logo"
+                    alt="CyberDetect Logo"
                     className="w-full h-full object-cover rounded-full"
                   />
                 </div>
@@ -188,55 +188,85 @@ const Index = () => {
               
               {/* Wireshark - Top */}
               <div className="absolute -top-9 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                  <div className="text-blue-600 text-lg font-bold">W</div>
+                <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center">
+                    <img
+                    src="/wire.jpeg"
+                    alt="Wireshark"
+                    className="w-10 h-10 object-contain"
+                    />
                 </div>
               </div>
               
               {/* CyberChef - Top Right */}
-              <div className="absolute -top-8 right-1/4 transform translate-x-6 w-20 h-20 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
-                <div className="text-white text-2xl">🍳</div>
-              </div>
+              {/* <div className="absolute -top-8 right-1/4 transform translate-x-6 w-20 h-20 bg-gradient-to-br from-green-500 to-green-700 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
+                <img
+                    src="/CF.png"
+                    alt="CyberChef"
+                    className="w-10 h-10 object-contain"
+                    />
+              </div> */}
               
               {/* Maltego - Right */}
               <div className="absolute right-0 top-1/2 transform translate-x-12 -translate-y-1/2 w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                  <div className="text-blue-600 text-lg font-bold">M</div>
+                <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center">
+                  <img
+                    src="/Maltego-Logo.jpg"
+                    alt="Maltego"
+                    className="w-10 h-10 object-contain"
+                  />
                 </div>
               </div>
               
               {/* Suricata - Bottom Right */}
               <div className="absolute bottom-8 right-1/4 transform translate-x-6 w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                  <div className="text-orange-600 text-xs font-bold">SUR</div>
+                <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center">
+                  <img
+                    src="/Suricata.jpg"
+                    alt="Suricata"
+                    className="w-10 h-10 object-contain"
+                  />
                 </div>
               </div>
               
-              {/* YARA - Bottom */}
+              {/* Maltego - Bottom */}
               <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 w-20 h-20 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
-                <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                  <div className="text-red-400 text-sm font-bold">Y</div>
+                <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center">
+                  <img
+                    src="/Maltego-Logo.jpg"
+                    alt="Maltego"
+                    className="w-10 h-10 object-contain"
+                  />
                 </div>
               </div>
               
               {/* Aircrack-ng - Bottom Left */}
               <div className="absolute bottom-8 left-1/4 transform -translate-x-6 w-20 h-20 bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
-                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
-                  <div className="text-gray-800 text-xs font-bold">AIR</div>
+                <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center">
+                  <img
+                    src="/Burpsuite.png"
+                    alt="Burpsuite"
+                    className="w-10 h-10 object-contain"
+                  />
                 </div>
               </div>
               
               {/* Prompt - Left */}
               <div className="absolute left-0 top-1/2 transform -translate-x-12 -translate-y-1/2 w-20 h-20 bg-gradient-to-br from-green-600 to-green-800 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
-                <div className="text-white text-2xl">{'>'}</div>
+                <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center">
+                  <img
+                    src="/git.png"
+                    alt="Git"
+                    className="w-10 h-10 object-contain"
+                  />
+                </div>
               </div>
               
               {/* Nmap - Top Left */}
-              <div className="absolute -top-8 left-1/4 transform -translate-x-6 w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
+              {/* <div className="absolute -top-8 left-1/4 transform -translate-x-6 w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg hover:scale-110 transition-transform opacity-90 border border-white/20">
                 <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
                   <div className="text-indigo-600 text-lg font-bold">N</div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Curved Connecting Lines with Arrows */}
@@ -320,7 +350,7 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Why Choose <span className="text-gradient">CyberZero</span>?
+              Why Choose <span className="text-gradient">CyberDetect</span>?
             </h2>
             <p className="text-xl text-foreground-muted max-w-3xl mx-auto">
               Leading technology education center with professional tech experts and industry recognition
@@ -383,7 +413,7 @@ const Index = () => {
                 Ready to Start Learning?
               </h2>
               <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-                Join CyberZero and develop skills in programming and cybersecurity from professional tech experts.
+                Join CyberDetect and develop skills in programming and cybersecurity from professional tech experts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/search">
