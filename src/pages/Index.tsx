@@ -1,10 +1,11 @@
+import { ThemeSelector } from "@/components/ThemeSelector";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { ChevronRight, Clock, Phone, Search, Shield, Star, Upload, Users } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Search, Shield, Users, Clock, Star, ChevronRight, Upload, Phone } from "lucide-react";
 import { toast } from "sonner";
 
 const Index = () => {
@@ -196,6 +197,19 @@ const Index = () => {
       {/* CTA Section */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
+          {/* Theme Selector */}
+          <div className="mb-16">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Personalize Your Experience
+              </h2>
+              <p className="text-xl text-foreground-muted max-w-2xl mx-auto">
+                Choose a theme that matches your style and preference
+              </p>
+            </div>
+            <ThemeSelector />
+          </div>
+
           <Card className="gradient-hero border-0 text-white">
             <CardContent className="p-12 text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">

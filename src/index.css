@@ -195,3 +195,100 @@
     background-clip: text;
   }
 }
+
+/* Theme Variations */
+.blue {
+  --background: 214 100% 97%;
+  --surface: 214 100% 100%;
+  --surface-elevated: 214 50% 95%;
+  
+  --foreground: 214 100% 15%;
+  --foreground-muted: 214 50% 45%;
+  --foreground-subtle: 214 30% 65%;
+
+  --primary: 214 100% 50%;
+  --primary-light: 214 90% 65%;
+  --primary-dark: 214 100% 35%;
+  --primary-foreground: 214 100% 98%;
+
+  --secondary: 200 80% 55%;
+  --secondary-light: 200 70% 70%;
+  --secondary-foreground: 200 100% 98%;
+
+  --accent: 214 100% 60%;
+  --accent-light: 214 80% 75%;
+  --accent-foreground: 214 100% 98%;
+
+  --card: 214 100% 100%;
+  --card-foreground: 214 100% 15%;
+  --card-border: 214 30% 85%;
+
+  --gradient-primary: linear-gradient(135deg, hsl(214 100% 50%), hsl(200 80% 55%));
+  --gradient-secondary: linear-gradient(135deg, hsl(200 80% 55%), hsl(214 80% 65%));
+  --gradient-hero: linear-gradient(135deg, hsl(214 100% 50%) 0%, hsl(200 80% 55%) 50%, hsl(214 80% 65%) 100%);
+  --gradient-card: linear-gradient(145deg, hsl(214 100% 100%) 0%, hsl(214 50% 98%) 100%);
+}
+
+.green {
+  --background: 120 60% 97%;
+  --surface: 120 60% 100%;
+  --surface-elevated: 120 30% 95%;
+  
+  --foreground: 120 60% 15%;
+  --foreground-muted: 120 30% 45%;
+  --foreground-subtle: 120 20% 65%;
+
+  --primary: 120 60% 50%;
+  --primary-light: 120 50% 65%;
+  --primary-dark: 120 70% 35%;
+  --primary-foreground: 120 60% 98%;
+
+  --secondary: 140 50% 55%;
+  --secondary-light: 140 40% 70%;
+  --secondary-foreground: 140 60% 98%;
+
+  --accent: 90 80% 55%;
+  --accent-light: 90 70% 70%;
+  --accent-foreground: 90 80% 98%;
+
+  --card: 120 60% 100%;
+  --card-foreground: 120 60% 15%;
+  --card-border: 120 20% 85%;
+
+  --gradient-primary: linear-gradient(135deg, hsl(120 60% 50%), hsl(140 50% 55%));
+  --gradient-secondary: linear-gradient(135deg, hsl(140 50% 55%), hsl(90 80% 55%));
+  --gradient-hero: linear-gradient(135deg, hsl(120 60% 50%) 0%, hsl(140 50% 55%) 50%, hsl(90 80% 55%) 100%);
+  --gradient-card: linear-gradient(145deg, hsl(120 60% 100%) 0%, hsl(120 30% 98%) 100%);
+}
+
+.purple {
+  --background: 270 60% 97%;
+  --surface: 270 60% 100%;
+  --surface-elevated: 270 30% 95%;
+  
+  --foreground: 270 60% 15%;
+  --foreground-muted: 270 30% 45%;
+  --foreground-subtle: 270 20% 65%;
+
+  --primary: 270 60% 50%;
+  --primary-light: 270 50% 65%;
+  --primary-dark: 270 70% 35%;
+  --primary-foreground: 270 60% 98%;
+
+  --secondary: 290 50% 55%;
+  --secondary-light: 290 40% 70%;
+  --secondary-foreground: 290 60% 98%;
+
+  --accent: 320 70% 60%;
+  --accent-light: 320 60% 75%;
+  --accent-foreground: 320 70% 98%;
+
+  --card: 270 60% 100%;
+  --card-foreground: 270 60% 15%;
+  --card-border: 270 20% 85%;
+
+  --gradient-primary: linear-gradient(135deg, hsl(270 60% 50%), hsl(290 50% 55%));
+  --gradient-secondary: linear-gradient(135deg, hsl(290 50% 55%), hsl(320 70% 60%));
+  --gradient-hero: linear-gradient(135deg, hsl(270 60% 50%) 0%, hsl(290 50% 55%) 50%, hsl(320 70% 60%) 100%);
+  --gradient-card: linear-gradient(145deg, hsl(270 60% 100%) 0%, hsl(270 30% 98%) 100%);
+}
