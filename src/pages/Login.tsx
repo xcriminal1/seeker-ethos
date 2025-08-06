@@ -41,7 +41,7 @@ const Login = () => {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg gradient-primary">
               <User className="h-5 w-5 text-white" />
             </div>
-            <span className="text-2xl font-bold text-gradient">PeopleFinder</span>
+            <span className="text-2xl font-bold text-gradient">CyberZer0</span>
           </Link>
         </div>
 

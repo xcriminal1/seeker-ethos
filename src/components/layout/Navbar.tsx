@@ -34,7 +34,7 @@ const Navbar = () => {
             <div className="flex h-8 w-8 items-center justify-center rounded-md gradient-primary">
               <Search className="h-4 w-4 text-white" />
             </div>
-            <span className="text-xl font-bold text-gradient">PeopleFinder</span>
+            <span className="text-xl font-bold text-gradient">CyberZer0</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -95,7 +95,7 @@ const Navbar = () => {
                   <div className="flex h-8 w-8 items-center justify-center rounded-md gradient-primary">
                     <Search className="h-4 w-4 text-white" />
                   </div>
-                  <span className="text-xl font-bold text-gradient">PeopleFinder</span>
+                  <span className="text-xl font-bold text-gradient">CyberZer0</span>
                 </Link>
                 
                 <div className="flex flex-col space-y-4">

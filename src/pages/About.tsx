@@ -69,7 +69,7 @@ const About = () => {
           </Badge>
           
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            About <span className="text-gradient">PeopleFinder</span>
+            About <span className="text-gradient">CyberZer0</span>
           </h1>
           
           <p className="text-xl text-foreground-muted mb-8 max-w-3xl mx-auto">

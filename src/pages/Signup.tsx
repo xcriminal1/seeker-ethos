@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Eye, EyeOff, Mail, Lock, User, Phone, UserPlus } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Eye, EyeOff, Lock, Mail, Phone, User, UserPlus } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const Signup = () => {
@@ -74,15 +74,15 @@ const Signup = () => {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg gradient-primary">
               <UserPlus className="h-5 w-5 text-white" />
             </div>
-            <span className="text-2xl font-bold text-gradient">PeopleFinder</span>
+            <span className="text-2xl font-bold text-gradient">CyberZero</span>
           </Link>
         </div>
 
         <Card className="gradient-card border-card-border shadow-xl">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
+            <CardTitle className="text-2xl font-bold">Join CyberZero</CardTitle>
             <p className="text-foreground-muted">
-              Join PeopleFinder to start ethical people verification
+              Develop skills in cybersecurity and programming from professional tech experts
             </p>
           </CardHeader>
           
@@ -242,7 +242,7 @@ const Signup = () => {
                 size="lg" 
                 className="w-full gradient-primary text-white border-0 hover:shadow-glow transition-all duration-300"
               >
-                Create Account
+                Join CyberZero
               </Button>
 
               {/* Divider */}
@@ -293,8 +293,8 @@ const Signup = () => {
         {/* Ethics Notice */}
         <div className="mt-6 text-center">
           <p className="text-xs text-foreground-muted max-w-sm mx-auto">
-            By creating an account, you're joining our mission for ethical people verification. 
-            We're committed to protecting your privacy and using technology responsibly.
+            Join CyberZero education center and develop skills from professional tech experts. 
+            Specializing in cybersecurity, programming, data science, and cloud computing.
           </p>
         </div>
       </div>

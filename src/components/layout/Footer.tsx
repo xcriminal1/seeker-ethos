@@ -12,7 +12,7 @@ const Footer = () => {
               <div className="flex h-8 w-8 items-center justify-center rounded-md gradient-primary">
                 <Search className="h-4 w-4 text-white" />
               </div>
-              <span className="text-xl font-bold text-gradient">PeopleFinder</span>
+              <span className="text-xl font-bold text-gradient">CyberZer0</span>
             </Link>
             <p className="text-foreground-muted text-sm leading-relaxed mb-4">
               Ethical people lookup platform for transparent and legal verification purposes only.
@@ -93,7 +93,7 @@ const Footer = () => {
             <div className="space-y-3 text-sm">
               <div className="flex items-center space-x-2 text-foreground-muted">
                 <Mail className="h-4 w-4" />
-                <span>support@peoplefinder.com</span>
+                <span>support@CyberZer0.com</span>
               </div>
               <div className="flex items-center space-x-2 text-foreground-muted">
                 <Phone className="h-4 w-4" />
@@ -111,7 +111,7 @@ const Footer = () => {
         <div className="border-t border-card-border mt-8 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-foreground-muted">
-              © 2024 PeopleFinder. All rights reserved.
+              © 2024 CyberZer0. All rights reserved.
             </div>
             
             {/* Ethics Notice */}

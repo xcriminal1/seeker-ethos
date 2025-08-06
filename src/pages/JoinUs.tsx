@@ -284,7 +284,7 @@ const JoinUs = () => {
                   <Checkbox id="terms" required />
                   <Label htmlFor="terms" className="text-sm leading-relaxed">
                     I agree to the terms and conditions and understand that my information will be used 
-                    to evaluate my application and communicate with me about opportunities at PeopleFinder.
+                    to evaluate my application and communicate with me about opportunities at CyberZer0.
                   </Label>
                 </div>
 
@@ -306,7 +306,7 @@ const JoinUs = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-primary" />
-                  Why Join PeopleFinder?
+                  Why Join CyberZer0?
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
