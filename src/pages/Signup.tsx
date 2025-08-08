@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Lock, Mail, Phone, User, UserPlus } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import { toast } from "sonner";
 
 const Signup = () => {
@@ -15,12 +15,14 @@ const Signup = () => {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    phone: "", // This field is collected but not sent to backend for registration in current auth.js
     password: "",
     confirmPassword: "",
     agreeToTerms: false,
     agreeToMarketing: false
   });
+  const [loading, setLoading] = useState(false); // Add loading state
+  const navigate = useNavigate(); // Initialize navigate hook
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -50,19 +52,42 @@ const Signup = () => {
     return true;
   };
 
-  const handleSignup = (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => { // Make function async
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
-    // Simulate signup
-    toast.success("Account created successfully! Please check your email to verify your account.");
-    
-    // In a real app, you would handle registration here
-    // For demo purposes, redirect to login page
-    setTimeout(() => {
-      window.location.href = "/login";
-    }, 2000);
+    setLoading(true); // Set loading to true
+
+    try {
+      const response = await fetch("http://localhost:3000/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // --- UPDATED: Send firstName, lastName, email, and password directly ---
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          password: formData.password
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success(data.message || "Account created successfully! Redirecting to login...");
+        navigate("/login"); // Redirect to login page after successful registration
+      } else {
+        toast.error(data.error || "Registration failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      toast.error("An error occurred during registration. Please try again later.");
+    } finally {
+      setLoading(false); // Set loading to false
+    }
   };
 
   return (
@@ -85,7 +110,7 @@ const Signup = () => {
               Develop skills in cybersecurity and programming from professional tech experts
             </p>
           </CardHeader>
-          
+
           <CardContent>
             <form onSubmit={handleSignup} className="space-y-6">
               {/* Name Fields */}
@@ -105,7 +130,7 @@ const Signup = () => {
                     <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-foreground-muted" />
                   </div>
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="lastName">Last Name</Label>
                   <Input
@@ -206,8 +231,8 @@ const Signup = () => {
               {/* Terms and Conditions */}
               <div className="space-y-3">
                 <div className="flex items-start space-x-2">
-                  <Checkbox 
-                    id="terms" 
+                  <Checkbox
+                    id="terms"
                     checked={formData.agreeToTerms}
                     onCheckedChange={(checked) => handleInputChange("agreeToTerms", checked)}
                     required
@@ -223,10 +248,10 @@ const Signup = () => {
                     </Link>
                   </Label>
                 </div>
-                
+
                 <div className="flex items-start space-x-2">
-                  <Checkbox 
-                    id="marketing" 
+                  <Checkbox
+                    id="marketing"
                     checked={formData.agreeToMarketing}
                     onCheckedChange={(checked) => handleInputChange("agreeToMarketing", checked)}
                   />
@@ -237,12 +262,13 @@ const Signup = () => {
               </div>
 
               {/* Sign Up Button */}
-              <Button 
-                type="submit" 
-                size="lg" 
+              <Button
+                type="submit"
+                size="lg"
                 className="w-full gradient-primary text-white border-0 hover:shadow-glow transition-all duration-300"
+                disabled={loading} // Disable button when loading
               >
-                Join CyberDetect
+                {loading ? "Registering..." : "Join CyberDetect"}
               </Button>
 
               {/* Divider */}
@@ -279,8 +305,8 @@ const Signup = () => {
             <div className="mt-6 text-center">
               <p className="text-foreground-muted">
                 Already have an account?{" "}
-                <Link 
-                  to="/login" 
+                <Link
+                  to="/login"
                   className="text-primary hover:text-primary-dark font-medium transition-colors"
                 >
                   Sign in here
