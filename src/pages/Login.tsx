@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import { toast } from "sonner";
 
 const Login = () => {
@@ -13,23 +13,47 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false); // Add loading state
+  const navigate = useNavigate(); // Initialize navigate hook
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => { // Make function async
     e.preventDefault();
-    
+
     if (!email || !password) {
       toast.error("Please fill in all required fields");
       return;
     }
 
-    // Simulate login
-    toast.success("Login successful! Welcome back.");
-    
-    // In a real app, you would handle authentication here
-    // For demo purposes, redirect to search page
-    setTimeout(() => {
-      window.location.href = "/search";
-    }, 1000);
+    setLoading(true); // Set loading to true
+
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: email, password }), // Send email as username for backend
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success(data.message || "Login successful! Welcome back.");
+        // Store a dummy token for demonstration. In a real app, this would be a JWT from the backend.
+        localStorage.setItem('authToken', 'dummy_jwt_token_from_backend'); // Replace with actual token if using JWT
+        localStorage.setItem('userId', data.userId); // Store user ID if needed
+
+        // Use navigate for redirection instead of window.location.href
+        navigate('/search');
+      } else {
+        toast.error(data.error || "Login failed. Invalid credentials.");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("An error occurred during login. Please try again later.");
+    } finally {
+      setLoading(false); // Set loading to false
+    }
   };
 
   return (
@@ -52,7 +76,7 @@ const Login = () => {
               Sign in to your account to continue searching
             </p>
           </CardHeader>
-          
+
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-6">
               {/* Email */}
@@ -76,8 +100,8 @@ const Login = () => {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password">Password</Label>
-                  <Link 
-                    to="/forgot-password" 
+                  <Link
+                    to="/forgot-password"
                     className="text-sm text-primary hover:text-primary-dark transition-colors"
                   >
                     Forgot password?
@@ -106,8 +130,8 @@ const Login = () => {
 
               {/* Remember Me */}
               <div className="flex items-center space-x-2">
-                <Checkbox 
-                  id="remember" 
+                <Checkbox
+                  id="remember"
                   checked={rememberMe}
                   onCheckedChange={(checked) => setRememberMe(checked as boolean)}
                 />
@@ -117,12 +141,13 @@ const Login = () => {
               </div>
 
               {/* Login Button */}
-              <Button 
-                type="submit" 
-                size="lg" 
+              <Button
+                type="submit"
+                size="lg"
                 className="w-full gradient-primary text-white border-0 hover:shadow-glow transition-all duration-300"
+                disabled={loading} // Disable button when loading
               >
-                Sign In
+                {loading ? "Signing In..." : "Sign In"}
               </Button>
 
               {/* Divider */}
@@ -159,8 +184,8 @@ const Login = () => {
             <div className="mt-6 text-center">
               <p className="text-foreground-muted">
                 Don't have an account?{" "}
-                <Link 
-                  to="/signup" 
+                <Link
+                  to="/signup"
                   className="text-primary hover:text-primary-dark font-medium transition-colors"
                 >
                   Sign up for free
