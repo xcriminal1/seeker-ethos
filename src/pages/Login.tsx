@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { checkBackendHealth, tryAlternativeAuth } from "@/lib/backend-utils";
 import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
@@ -27,30 +28,86 @@ const Login = () => {
     setLoading(true); // Set loading to true
 
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username: email, password }), // Send email as username for backend
+      console.log("Attempting login for email:", email);
+
+      // First check if backend is healthy
+      const healthCheck = await checkBackendHealth();
+      if (!healthCheck.isHealthy) {
+        toast.error(healthCheck.message);
+        return;
+      }
+
+      // Try the login with alternative endpoints
+      const response = await tryAlternativeAuth("auth/login", { 
+        username: email, 
+        password 
       });
 
-      const data = await response.json();
+      console.log("Login response status:", response.status);
+
+      // Check if response is JSON
+      const contentType = response.headers.get("content-type");
+      let data;
+      
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        data = await response.json();
+      } else {
+        // If not JSON, get text response
+        const textResponse = await response.text();
+        console.error("Non-JSON response:", textResponse);
+        throw new Error("Server returned non-JSON response");
+      }
+
+      console.log("Login response data:", data);
 
       if (response.ok) {
         toast.success(data.message || "Login successful! Welcome back.");
-        // Store a dummy token for demonstration. In a real app, this would be a JWT from the backend.
-        localStorage.setItem('authToken', 'dummy_jwt_token_from_backend'); // Replace with actual token if using JWT
-        localStorage.setItem('userId', data.userId); // Store user ID if needed
+        // Store authentication data
+        localStorage.setItem('authToken', data.token || 'authenticated_user_token'); 
+        localStorage.setItem('userId', data.userId || data.id || 'user_' + Date.now()); 
+        
+        // Store additional user data if available
+        if (data.user) {
+          localStorage.setItem('userData', JSON.stringify({
+            firstName: data.user.firstName || "CyberDetect",
+            lastName: data.user.lastName || "Student", 
+            email: data.user.email || email,
+            joinDate: data.user.createdAt || new Date().toISOString()
+          }));
+        } else {
+          // Fallback user data
+          localStorage.setItem('userData', JSON.stringify({
+            firstName: "CyberDetect",
+            lastName: "Student", 
+            email: email,
+            joinDate: new Date().toISOString()
+          }));
+        }
 
         // Use navigate for redirection instead of window.location.href
         navigate('/search');
       } else {
-        toast.error(data.error || "Login failed. Invalid credentials.");
+        // Check for specific error messages that indicate user should signup
+        if (data.error && (data.error.includes("not found") || data.error.includes("does not exist") || data.error.includes("No user found"))) {
+          toast.error("Account not found. Please sign up first.");
+          setTimeout(() => {
+            navigate('/signup');
+          }, 2000);
+        } else {
+          toast.error(data.error || data.message || "Login failed. Invalid credentials.");
+        }
       }
     } catch (error) {
       console.error("Login error:", error);
-      toast.error("An error occurred during login. Please try again later.");
+      
+      // More specific error messages
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        toast.error("Cannot connect to server. Please check if the backend is running on http://localhost:3000");
+      } else if (error.message.includes("non-JSON")) {
+        toast.error("Server error: Invalid response format. Please contact support.");
+      } else {
+        toast.error("An error occurred during login. Please try again later.");
+      }
     } finally {
       setLoading(false); // Set loading to false
     }
@@ -199,6 +256,13 @@ const Login = () => {
         <div className="mt-6 text-center">
           <p className="text-xs text-foreground-muted">
             By signing in, you agree to our ethical data practices and commitment to privacy protection.
+          </p>
+        </div>
+
+        {/* Backend Status Notice */}
+        <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+          <p className="text-xs text-blue-700 dark:text-blue-300 text-center">
+            <strong>Note:</strong> If you encounter connection errors, please ensure the backend server is running on port 3000.
           </p>
         </div>
       </div>

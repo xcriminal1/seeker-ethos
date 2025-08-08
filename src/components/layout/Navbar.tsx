@@ -1,14 +1,38 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import UserProfilePopup from "@/components/ui/user-profile-popup";
 import { useTheme } from "@/hooks/useTheme";
 import { Menu, Moon, Shield, Sun, User } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  // Check authentication status
+  useEffect(() => {
+    const checkAuth = () => {
+      const authToken = localStorage.getItem('authToken');
+      const userId = localStorage.getItem('userId');
+      setIsAuthenticated(!!(authToken && userId));
+    };
+
+    checkAuth();
+    
+    // Listen for storage changes (for logout from other tabs)
+    window.addEventListener('storage', checkAuth);
+    
+    // Check periodically in case localStorage is cleared
+    const interval = setInterval(checkAuth, 1000);
+
+    return () => {
+      window.removeEventListener('storage', checkAuth);
+      clearInterval(interval);
+    };
+  }, []);
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
@@ -72,18 +96,25 @@ const Navbar = () => {
                 <Sun className="h-4 w-4" />
               )}
             </Button>
-            <Link to="/login">
-              <Button variant="outline" size="sm">
-                <User className="h-4 w-4 mr-2" />
-                Login
-              </Button>
-            </Link>
-            <Link to="/search">
-              <Button size="sm" className="gradient-primary text-white border-0">
-                <Shield className="h-4 w-4 mr-2" />
-                Start Learning
-              </Button>
-            </Link>
+            
+            {isAuthenticated ? (
+              <UserProfilePopup />
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="outline" size="sm">
+                    <User className="h-4 w-4 mr-2" />
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/signup">
+                  <Button size="sm" className="gradient-primary text-white border-0">
+                    <Shield className="h-4 w-4 mr-2" />
+                    Join Now
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu */}
@@ -133,19 +164,27 @@ const Navbar = () => {
                     </Button>
                   </div>
                   
-                  <Link to="/login" onClick={() => setIsOpen(false)}>
-                    <Button variant="outline" className="w-full">
-                      <User className="h-4 w-4 mr-2" />
-                      Login
-                    </Button>
-                  </Link>
-                  
-                  <Link to="/search" onClick={() => setIsOpen(false)}>
-                    <Button className="w-full gradient-primary text-white border-0">
-                      <Shield className="h-4 w-4 mr-2" />
-                      Start Learning
-                    </Button>
-                  </Link>
+                  {isAuthenticated ? (
+                    <div className="w-full flex justify-center">
+                      <UserProfilePopup />
+                    </div>
+                  ) : (
+                    <>
+                      <Link to="/login" onClick={() => setIsOpen(false)}>
+                        <Button variant="outline" className="w-full">
+                          <User className="h-4 w-4 mr-2" />
+                          Login
+                        </Button>
+                      </Link>
+                      
+                      <Link to="/signup" onClick={() => setIsOpen(false)}>
+                        <Button className="w-full gradient-primary text-white border-0">
+                          <Shield className="h-4 w-4 mr-2" />
+                          Join Now
+                        </Button>
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </SheetContent>

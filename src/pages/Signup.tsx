@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { checkBackendHealth, tryAlternativeAuth } from "@/lib/backend-utils";
 import { Eye, EyeOff, Lock, Mail, Phone, User, UserPlus } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
@@ -60,31 +61,74 @@ const Signup = () => {
     setLoading(true); // Set loading to true
 
     try {
-      const response = await fetch("http://localhost:3000/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // --- UPDATED: Send firstName, lastName, email, and password directly ---
-        body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          password: formData.password
-        }),
+      console.log("Attempting registration with data:", {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        // Don't log password for security
       });
 
-      const data = await response.json();
+      // First check if backend is healthy
+      const healthCheck = await checkBackendHealth();
+      if (!healthCheck.isHealthy) {
+        toast.error(healthCheck.message);
+        return;
+      }
+
+      // Try the registration with alternative endpoints
+      const response = await tryAlternativeAuth("auth/register", {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password
+      });
+
+      console.log("Registration response status:", response.status);
+
+      // Check if response is JSON
+      const contentType = response.headers.get("content-type");
+      let data;
+      
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        data = await response.json();
+      } else {
+        // If not JSON, get text response
+        const textResponse = await response.text();
+        console.error("Non-JSON response:", textResponse);
+        throw new Error("Server returned non-JSON response");
+      }
+
+      console.log("Registration response data:", data);
 
       if (response.ok) {
         toast.success(data.message || "Account created successfully! Redirecting to login...");
-        navigate("/login"); // Redirect to login page after successful registration
+        
+        // Store user data for later use (always store, regardless of backend response)
+        localStorage.setItem('userData', JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          joinDate: new Date().toISOString()
+        }));
+        
+        // Wait a moment before redirect
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500);
       } else {
-        toast.error(data.error || "Registration failed. Please try again.");
+        toast.error(data.error || data.message || "Registration failed. Please try again.");
       }
     } catch (error) {
       console.error("Signup error:", error);
-      toast.error("An error occurred during registration. Please try again later.");
+      
+      // More specific error messages
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        toast.error("Cannot connect to server. Please check if the backend is running on http://localhost:3000");
+      } else if (error.message.includes("non-JSON")) {
+        toast.error("Server error: Invalid response format. Please contact support.");
+      } else {
+        toast.error("An error occurred during registration. Please try again later.");
+      }
     } finally {
       setLoading(false); // Set loading to false
     }
@@ -321,6 +365,13 @@ const Signup = () => {
           <p className="text-xs text-foreground-muted max-w-sm mx-auto">
             Join CyberDetect education center and develop skills from professional tech experts. 
             Specializing in cybersecurity, programming, data science, and cloud computing.
+          </p>
+        </div>
+
+        {/* Backend Status Notice */}
+        <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+          <p className="text-xs text-blue-700 dark:text-blue-300 text-center">
+            <strong>Note:</strong> If you encounter connection errors, please ensure the backend server is running on port 3000.
           </p>
         </div>
       </div>

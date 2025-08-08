@@ -115,12 +115,12 @@ const Index = () => {
           {/* CTA Buttons */}
           <div className={`transition-all duration-1000 delay-600 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-              <Link to="/search">
+              <Link to="/signup">
                 <Button 
                   size="lg" 
                   className="px-8 py-4 text-lg gradient-primary text-white border-0 hover:scale-105 transition-transform duration-300 group"
                 >
-                  Login/Signup
+                  Join CyberDetect
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
@@ -416,10 +416,10 @@ const Index = () => {
                 Join CyberDetect and develop skills in programming and cybersecurity from professional tech experts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/search">
+                <Link to="/signup">
                   <Button size="lg" variant="secondary" className="bg-background text-foreground border-border hover:bg-accent hover:text-accent-foreground hover:scale-105 transition-all duration-300">
                     <Shield className="mr-2 h-5 w-5" />
-                    Start Learning
+                    Join Now
                   </Button>
                 </Link>
                 <Link to="/about">
