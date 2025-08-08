@@ -1,14 +1,62 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useTheme } from "@/hooks/useTheme";
-import { Menu, Moon, Shield, Sun, User } from "lucide-react";
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { LogOut, Menu, Moon, Settings, Shield, Sun, User } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState<{
+    firstName: string;
+    lastName: string;
+    email: string;
+    plan: string;
+    avatar: string;
+  } | null>(null);
   const { theme, setTheme } = useTheme();
+
+  // Check authentication status
+  useEffect(() => {
+    const userToken = localStorage.getItem('authToken');
+    const userId = localStorage.getItem('userId');
+    
+    if (userToken && userId) {
+      setIsLoggedIn(true);
+      // Simulate user data - in real app, fetch from API
+      setUserData({
+        firstName: "John",
+        lastName: "Doe",
+        email: "john.doe@example.com",
+        plan: "Pro",
+        avatar: ""
+      });
+    } else {
+      setIsLoggedIn(false);
+      setUserData(null);
+    }
+  }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userId');
+    toast.success("Signed out successfully!");
+    setIsProfileOpen(false);
+    setIsLoggedIn(false);
+    setUserData(null);
+    navigate('/');
+  };
+
+  const getInitials = (firstName: string, lastName: string) => {
+    return `${firstName?.charAt(0) || ''}${lastName?.charAt(0) || ''}`.toUpperCase();
+  };
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
@@ -72,12 +120,82 @@ const Navbar = () => {
                 <Sun className="h-4 w-4" />
               )}
             </Button>
-            <Link to="/login">
-              <Button variant="outline" size="sm">
-                <User className="h-4 w-4 mr-2" />
-                Login
-              </Button>
-            </Link>
+            
+            {isLoggedIn && userData ? (
+              <Sheet open={isProfileOpen} onOpenChange={setIsProfileOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" className="flex items-center gap-2 p-2 h-auto">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage src={userData.avatar} alt={`${userData.firstName} ${userData.lastName}`} />
+                      <AvatarFallback className="bg-primary text-white text-sm">
+                        {getInitials(userData.firstName, userData.lastName)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <span className="text-sm font-medium">{userData.firstName}</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[400px] p-0">
+                  <div className="flex flex-col h-full">
+                    {/* Profile Header */}
+                    <div className="p-6 bg-gradient-to-br from-primary/10 to-secondary/10 border-b">
+                      <div className="flex items-center space-x-4">
+                        <Avatar className="h-16 w-16 border-2 border-white shadow-lg">
+                          <AvatarImage src={userData.avatar} alt={`${userData.firstName} ${userData.lastName}`} />
+                          <AvatarFallback className="bg-primary text-white text-lg font-semibold">
+                            {getInitials(userData.firstName, userData.lastName)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <h2 className="text-xl font-bold text-foreground">
+                            {userData.firstName} {userData.lastName}
+                          </h2>
+                          <p className="text-sm text-foreground-muted">{userData.email}</p>
+                          <Badge variant="secondary" className="text-xs mt-1">
+                            {userData.plan} Plan
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Profile Content */}
+                    <div className="flex-1 p-6 space-y-4">
+                      <div className="space-y-2">
+                        <Button variant="ghost" className="w-full justify-start">
+                          <Settings className="h-4 w-4 mr-3" />
+                          Account Settings
+                        </Button>
+                        <Button variant="ghost" className="w-full justify-start">
+                          <Shield className="h-4 w-4 mr-3" />
+                          Security Settings
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Profile Footer */}
+                    <div className="border-t p-4">
+                      <Button 
+                        variant="destructive" 
+                        size="lg"
+                        className="w-full"
+                        onClick={handleSignOut}
+                      >
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Sign Out
+                      </Button>
+                    </div>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="outline" size="sm">
+                    <User className="h-4 w-4 mr-2" />
+                    Login
+                  </Button>
+                </Link>
+              </>
+            )}
             <Link to="/search">
               <Button size="sm" className="gradient-primary text-white border-0">
                 <Shield className="h-4 w-4 mr-2" />
@@ -133,12 +251,42 @@ const Navbar = () => {
                     </Button>
                   </div>
                   
-                  <Link to="/login" onClick={() => setIsOpen(false)}>
-                    <Button variant="outline" className="w-full">
-                      <User className="h-4 w-4 mr-2" />
-                      Login
-                    </Button>
-                  </Link>
+                  {isLoggedIn && userData ? (
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-3 p-3 bg-primary/10 rounded-lg">
+                        <Avatar className="h-10 w-10">
+                          <AvatarImage src={userData.avatar} alt={`${userData.firstName} ${userData.lastName}`} />
+                          <AvatarFallback className="bg-primary text-white text-sm">
+                            {getInitials(userData.firstName, userData.lastName)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <div className="font-medium text-sm">{userData.firstName} {userData.lastName}</div>
+                          <div className="text-xs text-foreground-muted">{userData.plan} Plan</div>
+                        </div>
+                      </div>
+                      <Button 
+                        variant="destructive" 
+                        className="w-full"
+                        onClick={() => {
+                          setIsOpen(false);
+                          handleSignOut();
+                        }}
+                      >
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Sign Out
+                      </Button>
+                    </div>
+                  ) : (
+                    <>
+                      <Link to="/login" onClick={() => setIsOpen(false)}>
+                        <Button variant="outline" className="w-full">
+                          <User className="h-4 w-4 mr-2" />
+                          Login
+                        </Button>
+                      </Link>
+                    </>
+                  )}
                   
                   <Link to="/search" onClick={() => setIsOpen(false)}>
                     <Button className="w-full gradient-primary text-white border-0">
