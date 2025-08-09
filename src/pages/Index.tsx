@@ -106,9 +106,9 @@ const Index = () => {
           {/* Subtitle */}
           <div className={`transition-all duration-1000 delay-400 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <p className="text-xl md:text-2xl text-foreground-muted mb-12 max-w-4xl mx-auto leading-relaxed">
-              We believe in providing{" "}
-              <span className="text-primary font-semibold">Best career opportunities! Excel your growth towards</span>{" "}
-              future through our virtual internship program today.
+              We believe in providing the{" "}
+              <span className="text-primary font-semibold">best opportunities for information access!</span>{" "}
+              Excel your growth towards a secure future through our virtual identity verification platform.
             </p>
           </div>
 
@@ -155,10 +155,10 @@ const Index = () => {
               Welcome to <span className="text-gradient">CyberDetect</span>
             </h2>
             <p className="text-xl text-foreground-muted max-w-4xl mx-auto leading-relaxed">
-              education center to develop skills from professional tech experts.
+              Intelligence center to master verification skills from professional data experts.
             </p>
             <p className="text-lg text-foreground-muted mt-4 max-w-2xl mx-auto">
-              More efficient and more effective.
+              More accurate. More reliable.
             </p>
           </div>
 
@@ -326,19 +326,19 @@ const Index = () => {
             <div className="text-center">
               <h3 className="text-xl font-bold mb-4 text-primary">Achievement</h3>
               <p className="text-foreground-muted text-sm">
-                Successfully trained 500+ police officers in cyber law enforcement & digital forensics.
+                Successfully assisted 500+ law enforcement officers in identity verification and digital record analysis.
               </p>
             </div>
             <div className="text-center">
               <h3 className="text-xl font-bold mb-4 text-primary">About our founder</h3>
               <p className="text-foreground-muted text-sm">
-                Anmol Kumar is a certified cybersecurity expert, trainer, and law enforcement instructor with extensive hands-on experience in cybercrime investigations, network security, and digital forensics.
+                Xcriminal is a certified data intelligence expert, trainer, and law enforcement advisor with extensive hands-on experience in identity verification, data analysis, and digital investigation.
               </p>
             </div>
             <div className="text-center">
               <h3 className="text-xl font-bold mb-4 text-primary">Expertise</h3>
               <p className="text-foreground-muted text-sm">
-                Certified cybersecurity expert and law enforcement instructor specializing in cybercrime investigations, digital forensics, and threat intelligence.
+                Certified identity intelligence specialist and law enforcement instructor, skilled in data verification, digital investigations, and information retrieval from trusted sources.
               </p>
             </div>
           </div>
@@ -353,7 +353,7 @@ const Index = () => {
               Why Choose <span className="text-gradient">CyberDetect</span>?
             </h2>
             <p className="text-xl text-foreground-muted max-w-3xl mx-auto">
-              Leading technology education center with professional tech experts and industry recognition
+              Leading identity intelligence center with professional data experts and trusted industry recognition.
             </p>
           </div>
 
@@ -361,23 +361,23 @@ const Index = () => {
             {[
               {
                 icon: <Shield className="h-8 w-8" />,
-                title: "Cybersecurity Expert",
-                description: "Certified cybersecurity expert training with 500+ police officers trained"
+                title: "Identity Verification Expert",
+                description: "Certified in secure identity checks with 500+ professionals trained."
               },
               {
                 icon: <Code className="h-8 w-8" />,
-                title: "Programming Skills",
-                description: "Master programming languages and development frameworks from industry experts"
+                title: "Data Search & Analysis",
+                description: "Master techniques to retrieve and analyze information from trusted sources."
               },
               {
                 icon: <BookOpen className="h-8 w-8" />,
-                title: "Professional Training",
-                description: "Hands-on courses with industry-recognized certifications and real-world applications"
+                title: "Digital Record Management",
+                description: "Hands-on training in organizing, securing, and verifying personal records."
               },
               {
                 icon: <Award className="h-8 w-8" />,
                 title: "Proven Results",
-                description: "Successfully trained 2,500+ university students with specialized expertise"
+                description: "Verified data for 2,500+ cases with accuracy and reliability."
               }
             ].map((feature, index) => (
               <Card 
@@ -410,16 +410,16 @@ const Index = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent"></div>
             <CardContent className="p-12 text-center relative z-10">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Ready to Start Learning?
+                Ready to Start Searching?
               </h2>
               <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-                Join CyberDetect and develop skills in programming and cybersecurity from professional tech experts.
+                Join CyberDetect and gain expertise in identity verification and data analysis from professional intelligence experts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/search">
                   <Button size="lg" variant="secondary" className="bg-background text-foreground border-border hover:bg-accent hover:text-accent-foreground hover:scale-105 transition-all duration-300">
                     <Shield className="mr-2 h-5 w-5" />
-                    Start Learning
+                    Start Searching
                   </Button>
                 </Link>
                 <Link to="/about">

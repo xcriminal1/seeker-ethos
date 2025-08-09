@@ -21,8 +21,8 @@ const Pricing = () => {
       name: "Basic",
       icon: <User className="h-6 w-6" />,
       description: "Perfect for occasional searches",
-      monthlyPrice: 9,
-      yearlyPrice: 89,
+      monthlyPrice: 499,
+      yearlyPrice: 5499,
       yearlyDiscount: "17% off",
       features: [
         "10 searches per month",
@@ -39,8 +39,8 @@ const Pricing = () => {
       name: "Professional",
       icon: <Zap className="h-6 w-6" />,
       description: "For professionals and businesses",
-      monthlyPrice: 29,
-      yearlyPrice: 299,
+      monthlyPrice: 2229,
+      yearlyPrice: 22290,
       yearlyDiscount: "14% off",
       features: [
         "100 searches per month",
@@ -60,8 +60,8 @@ const Pricing = () => {
       name: "Premium",
       icon: <Crown className="h-6 w-6" />,
       description: "For enterprises and heavy users",
-      monthlyPrice: 99,
-      yearlyPrice: 999,
+      monthlyPrice: 19999,
+      yearlyPrice: 179999,
       yearlyDiscount: "16% off",
       features: [
         "Unlimited searches",
