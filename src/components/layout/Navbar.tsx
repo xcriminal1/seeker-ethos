@@ -86,6 +86,8 @@ const Navbar = () => {
   };
 
   const handleOpenSettings = () => {
+    console.log("Navbar: Opening settings modal");
+    console.log("Navbar: Current userData:", userData);
     setIsProfileOpen(false);
     setIsSettingsOpen(true);
   };

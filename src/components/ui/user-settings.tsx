@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import {
     Calendar,
     Camera,
+    CreditCard,
     Mail,
     Phone,
     Save,
@@ -35,6 +36,8 @@ interface UserSettingsProps {
 }
 
 const UserSettings = ({ onClose, onSave }: UserSettingsProps) => {
+  console.log("UserSettings: Component rendered with props:", { onClose: !!onClose, onSave: !!onSave });
+  
   const [formData, setFormData] = useState<UserData>({
     firstName: "",
     lastName: "",
@@ -48,11 +51,53 @@ const UserSettings = ({ onClose, onSave }: UserSettingsProps) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Load current user data
+    // Load current user data with better debugging
+    console.log("UserSettings: Loading user data...");
+    
     const storedUserData = localStorage.getItem('userData');
+    const storedUserToken = localStorage.getItem('authToken');
+    const storedUserId = localStorage.getItem('userId');
+    
+    console.log("UserSettings: Found stored data:", {
+      hasUserData: !!storedUserData,
+      hasToken: !!storedUserToken,
+      hasUserId: !!storedUserId,
+      userData: storedUserData ? JSON.parse(storedUserData) : null
+    });
+    
     if (storedUserData) {
-      const userData = JSON.parse(storedUserData);
-      setFormData(userData);
+      try {
+        const userData = JSON.parse(storedUserData);
+        console.log("UserSettings: Parsed user data:", userData);
+        setFormData(userData);
+      } catch (error) {
+        console.error("UserSettings: Error parsing userData:", error);
+        // Fallback data
+        setFormData({
+          firstName: "User",
+          lastName: "",
+          email: "user@example.com",
+          phone: "",
+          plan: "Pro",
+          avatar: "",
+          joinedDate: new Date().toISOString(),
+          lastActive: new Date().toISOString()
+        });
+      }
+    } else {
+      console.warn("UserSettings: No userData found in localStorage");
+      // Try to get basic info from other sources
+      const fallbackData = {
+        firstName: "User",
+        lastName: "",
+        email: "user@example.com",
+        phone: "",
+        plan: "Pro",
+        avatar: "",
+        joinedDate: new Date().toISOString(),
+        lastActive: new Date().toISOString()
+      };
+      setFormData(fallbackData);
     }
   }, []);
 
@@ -69,11 +114,13 @@ const UserSettings = ({ onClose, onSave }: UserSettingsProps) => {
 
   const handleSave = async () => {
     setLoading(true);
+    console.log("UserSettings: Saving data:", formData);
     
     try {
       // Validate required fields
       if (!formData.firstName.trim() || !formData.email.trim()) {
         toast.error("First name and email are required");
+        setLoading(false);
         return;
       }
 
@@ -83,6 +130,7 @@ const UserSettings = ({ onClose, onSave }: UserSettingsProps) => {
         lastActive: new Date().toISOString()
       };
       
+      console.log("UserSettings: Saving to localStorage:", updatedUserData);
       localStorage.setItem('userData', JSON.stringify(updatedUserData));
       
       // Call parent callback
@@ -92,14 +140,18 @@ const UserSettings = ({ onClose, onSave }: UserSettingsProps) => {
       onClose();
       
     } catch (error) {
-      console.error("Error updating profile:", error);
+      console.error("UserSettings: Error updating profile:", error);
       toast.error("Failed to update profile. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  return (
+  const handleCancelPlan = () => {
+    console.log("UserSettings: Cancel Pro Plan button clicked");
+    // Show a toast message (non-functional as requested)
+    toast.info("Plan cancellation feature is coming soon!");
+  };  return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <Card className="w-full max-w-md max-h-[90vh] overflow-y-auto">
         <CardHeader className="pb-4">
@@ -108,7 +160,10 @@ const UserSettings = ({ onClose, onSave }: UserSettingsProps) => {
               <User className="h-5 w-5" />
               Profile Settings
             </CardTitle>
-            <Button variant="ghost" size="icon" onClick={onClose}>
+            <Button variant="ghost" size="icon" onClick={() => {
+              console.log("UserSettings: Close button clicked");
+              onClose();
+            }}>
               <X className="h-4 w-4" />
             </Button>
           </div>
@@ -226,6 +281,27 @@ const UserSettings = ({ onClose, onSave }: UserSettingsProps) => {
                 </Badge>
               </div>
             </div>
+
+            {/* Plan Management */}
+            {formData.plan === "Pro" && (
+              <div className="mt-4 p-3 bg-orange-50 dark:bg-orange-950/20 rounded-lg border border-orange-200 dark:border-orange-800">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-orange-800 dark:text-orange-200">Pro Plan Active</p>
+                    <p className="text-xs text-orange-600 dark:text-orange-300">Enjoy unlimited searches and premium features</p>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={handleCancelPlan}
+                    className="text-orange-700 border-orange-300 hover:bg-orange-100 dark:text-orange-300 dark:border-orange-700 dark:hover:bg-orange-900/20"
+                  >
+                    <CreditCard className="h-3 w-3 mr-1" />
+                    Cancel Plan
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
 
           <Separator />
