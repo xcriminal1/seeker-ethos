@@ -25,6 +25,7 @@ interface SearchResult {
   Age: number;
   Gender: string;
   PAN: string;
+  Aadhar: string;
   Email: string;
   Address: string;
   DL: string;
@@ -388,6 +389,11 @@ export default function SearchPage() {
                       <CreditCard className="h-3 w-3 text-foreground-muted" />
                       <span className="text-foreground-muted">PAN:</span>
                       <span className="text-foreground font-mono">{person.PAN}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <FileText className="h-3 w-3 text-foreground-muted" />
+                      <span className="text-foreground-muted">Aadhar:</span>
+                      <span className="text-foreground font-mono">{person.Aadhar}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Phone className="h-3 w-3 text-foreground-muted" />

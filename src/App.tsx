@@ -1,4 +1,3 @@
-import React from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +13,7 @@ import About from "./pages/About";
 import Index from "./pages/Index";
 import JoinUs from "./pages/JoinUs";
 import Login from "./pages/Login";
+import Members from "./pages/Members";
 import NotFound from "./pages/NotFound";
 import Pricing from "./pages/Pricing";
 import Search from "./pages/Search";
@@ -39,6 +39,7 @@ const App = () => {
                   <Route path="/search" element={<Search />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/our-team" element={<Members />} />
                   <Route path="/join" element={<JoinUs />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
