@@ -48,19 +48,48 @@ export default function SearchPage() {
   useEffect(() => {
     const userToken = localStorage.getItem('authToken');
     const userId = localStorage.getItem('userId');
+    const storedUserData = localStorage.getItem('userData');
     
     if (userToken && userId) {
       setIsLoggedIn(true);
-      // Simulate user data - in real app, fetch from API
-      setUserData({
-        id: userId,
-        firstName: "John",
-        lastName: "Doe",
-        email: "john.doe@example.com",
-        phone: "+91 9876543210",
-        plan: "Pro",
-        avatar: ""
-      });
+      
+      if (storedUserData) {
+        try {
+          const parsedUserData = JSON.parse(storedUserData);
+          setUserData({
+            id: userId,
+            firstName: parsedUserData.firstName || "User",
+            lastName: parsedUserData.lastName || "",
+            email: parsedUserData.email || "user@example.com",
+            phone: parsedUserData.phone || "",
+            plan: parsedUserData.plan || "Pro",
+            avatar: parsedUserData.avatar || ""
+          });
+        } catch (error) {
+          console.error('Error parsing user data:', error);
+          // Fallback data if parsing fails
+          setUserData({
+            id: userId,
+            firstName: "User",
+            lastName: "",
+            email: "user@example.com",
+            phone: "",
+            plan: "Pro",
+            avatar: ""
+          });
+        }
+      } else {
+        // Fallback data if no stored user data
+        setUserData({
+          id: userId,
+          firstName: "User",
+          lastName: "",
+          email: "user@example.com",
+          phone: "",
+          plan: "Pro",
+          avatar: ""
+        });
+      }
     } else {
       setIsLoggedIn(false);
       setUserData(null);
@@ -80,6 +109,7 @@ export default function SearchPage() {
   const handleSignOut = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userId');
+    localStorage.removeItem('userData');
     toast.success("Signed out successfully!");
     setIsProfileOpen(false);
     setIsLoggedIn(false);

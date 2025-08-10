@@ -39,9 +39,22 @@ const Login = () => {
 
       if (response.ok) {
         toast.success(data.message || "Login successful! Welcome back.");
-        // Store a dummy token for demonstration. In a real app, this would be a JWT from the backend.
-        localStorage.setItem('authToken', 'dummy_jwt_token_from_backend'); // Replace with actual token if using JWT
-        localStorage.setItem('userId', data.userId); // Store user ID if needed
+        // Store authentication token and user data
+        localStorage.setItem('authToken', data.token || 'dummy_jwt_token_from_backend');
+        localStorage.setItem('userId', data.userId || 'user_123');
+        
+        // Store user profile data
+        const userData = {
+          firstName: data.user?.firstName || data.firstName || "User",
+          lastName: data.user?.lastName || data.lastName || "",
+          email: data.user?.email || email,
+          phone: data.user?.phone || "+91 9876543210",
+          plan: data.user?.plan || "Pro",
+          avatar: data.user?.avatar || "",
+          joinedDate: data.user?.joinedDate || new Date().toISOString(),
+          lastActive: new Date().toISOString()
+        };
+        localStorage.setItem('userData', JSON.stringify(userData));
 
         // Use navigate for redirection instead of window.location.href
         navigate('/search');

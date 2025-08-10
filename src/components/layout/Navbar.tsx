@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import UserSettings from "@/components/ui/user-settings";
 import { useTheme } from "@/hooks/useTheme";
 import { LogOut, Menu, Moon, Settings, Shield, Sun, User } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -13,13 +14,17 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState<{
     firstName: string;
     lastName: string;
     email: string;
+    phone: string;
     plan: string;
     avatar: string;
+    joinedDate: string;
+    lastActive: string;
   } | null>(null);
   const { theme, setTheme } = useTheme();
 
@@ -27,17 +32,42 @@ const Navbar = () => {
   useEffect(() => {
     const userToken = localStorage.getItem('authToken');
     const userId = localStorage.getItem('userId');
+    const storedUserData = localStorage.getItem('userData');
     
     if (userToken && userId) {
       setIsLoggedIn(true);
-      // Simulate user data - in real app, fetch from API
-      setUserData({
-        firstName: "John",
-        lastName: "Doe",
-        email: "john.doe@example.com",
-        plan: "Pro",
-        avatar: ""
-      });
+      
+      if (storedUserData) {
+        try {
+          const parsedUserData = JSON.parse(storedUserData);
+          setUserData(parsedUserData);
+        } catch (error) {
+          console.error('Error parsing user data:', error);
+          // Fallback data if parsing fails
+          setUserData({
+            firstName: "User",
+            lastName: "",
+            email: "user@example.com",
+            phone: "",
+            plan: "Pro",
+            avatar: "",
+            joinedDate: new Date().toISOString(),
+            lastActive: new Date().toISOString()
+          });
+        }
+      } else {
+        // Fallback data if no stored user data
+        setUserData({
+          firstName: "User",
+          lastName: "",
+          email: "user@example.com",
+          phone: "",
+          plan: "Pro",
+          avatar: "",
+          joinedDate: new Date().toISOString(),
+          lastActive: new Date().toISOString()
+        });
+      }
     } else {
       setIsLoggedIn(false);
       setUserData(null);
@@ -47,11 +77,23 @@ const Navbar = () => {
   const handleSignOut = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userId');
+    localStorage.removeItem('userData');
     toast.success("Signed out successfully!");
     setIsProfileOpen(false);
     setIsLoggedIn(false);
     setUserData(null);
     navigate('/');
+  };
+
+  const handleOpenSettings = () => {
+    setIsProfileOpen(false);
+    setIsSettingsOpen(true);
+  };
+
+  const handleSettingsSave = (newUserData: typeof userData) => {
+    setUserData(newUserData);
+    // Refresh navbar to show updated data
+    toast.success("Profile updated successfully!");
   };
 
   const getInitials = (firstName: string, lastName: string) => {
@@ -67,13 +109,14 @@ const Navbar = () => {
     { name: "Search", href: "/search" },
     { name: "About", href: "/about" },
     { name: "Pricing", href: "/pricing" },
-    { name: "Members", href: "/members" },
+    { name: "Our Team", href: "/our-team" },
     { name: "Join Us", href: "/join" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
+    <>
     <nav className="sticky top-0 z-50 w-full border-b border-card-border bg-surface/80 backdrop-blur-md">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
@@ -160,7 +203,11 @@ const Navbar = () => {
                     {/* Profile Content */}
                     <div className="flex-1 p-6 space-y-4">
                       <div className="space-y-2">
-                        <Button variant="ghost" className="w-full justify-start">
+                        <Button 
+                          variant="ghost" 
+                          className="w-full justify-start"
+                          onClick={handleOpenSettings}
+                        >
                           <Settings className="h-4 w-4 mr-3" />
                           Account Settings
                         </Button>
@@ -301,6 +348,15 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
+    
+    {/* User Settings Modal */}
+    {isSettingsOpen && userData && (
+      <UserSettings
+        onClose={() => setIsSettingsOpen(false)}
+        onSave={handleSettingsSave}
+      />
+    )}
+    </>
   );
 };
 
